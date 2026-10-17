@@ -3,7 +3,7 @@
 
 <img src="./firat_oskay_neon.gif" alt="FIRAT OSKAY Neon Banner" width="100%" />
 
-### 💻 Computer Engineering | ☕ Java | 🐍 Python | 🤖 Artificial Intelligence
+### 💻 Computer Engineering | ☕ Java | 🐍 Python
 
 **Building Software • Exploring AI • Learning Every Day**
 
