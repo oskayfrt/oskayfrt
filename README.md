@@ -21,7 +21,6 @@
 🧠 Artificial Intelligence & Medical Imaging
 🏗️ Data Structures & Algorithms
 🌐 Web Applications
-📍 Malatya, Türkiye
 </td>
 <td width="48%" valign="top">
 
