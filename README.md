@@ -33,11 +33,6 @@
 
 🏗️ **Software Architecture & Algorithms**
 
-📍 **Malatya, Türkiye**
-
-I enjoy developing software, understanding how systems work internally, and turning ideas into real-world projects.
-
-My interests include artificial intelligence, backend development, data structures, algorithms, and modern software technologies.
 
 </td>
 <td width="45%">
