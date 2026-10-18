@@ -9,21 +9,23 @@
 <a href="https://www.instagram.com/oskay.frt/"><img src="https://img.shields.io/badge/Instagram-oskay.frt-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" /></a>
 </div>
 
-👨‍💻 About Me
+## 👨‍💻 About Me
+
 <table>
 <tr>
 <td width="52%" valign="top">
 
-🎓 Computer Engineering Student — İnönü University
-☕ Java & Software Development
-🐍 Python & Computer Vision
-🧠 Artificial Intelligence & Medical Imaging
-🏗️ Data Structures & Algorithms
-🌐 Web Applications
+🎓 **Computer Engineering Student — İnönü University**<br/>
+☕ **Java & Software Development**<br/>
+🐍 **Python & Computer Vision**<br/>
+🧠 **Artificial Intelligence & Medical Imaging**<br/>
+🏗️ **Data Structures & Algorithms**<br/>
+🌐 **Web Applications**
+
 </td>
 <td width="48%" valign="top">
 
-public class FiratOskay {
+<pre lang="java"><code>public class FiratOskay {
     String role = "Computer Engineering Student";
     String university = "Inonu University";
 
@@ -37,10 +39,13 @@ public class FiratOskay {
         "Data Structures",
         "Artificial Intelligence"
     };
-}
+}</code></pre>
+
 </td>
 </tr>
 </table>
+
+---
 
 🛠️ Tech Stack
 <div align="center">
