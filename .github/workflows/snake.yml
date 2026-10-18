@@ -1,5 +1,5 @@
 
-name: Generate Contribution Snake
+name: Generate Snake and Pac-Man
 
 on:
   workflow_dispatch:
@@ -9,11 +9,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: contribution-animations
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
-      - name: Generate snake SVGs
+      - name: Generate Snake
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: oskayfrt
@@ -21,7 +27,14 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      - name: Publish to output branch
+      - name: Generate Pac-Man
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: oskayfrt
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          games: pacman
+
+      - name: Publish Animations
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
