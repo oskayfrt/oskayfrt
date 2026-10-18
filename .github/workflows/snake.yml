@@ -1,10 +1,12 @@
-
 name: Generate Snake and Pac-Man
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
+  push:
+    paths:
+      - ".github/workflows/snake.yml"
 
 permissions:
   contents: write
@@ -19,6 +21,9 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+
       - name: Generate Snake
         uses: Platane/snk/svg-only@v3
         with:
@@ -31,41 +36,40 @@ jobs:
         uses: abozanona/pacman-contribution-graph@main
         with:
           github_user_name: oskayfrt
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           games: pacman
 
-      - name: Find and verify animations
+      - name: Verify both animations before publishing
         shell: bash
         run: |
-          echo "All SVG files:"
-          find . -type f -name "*.svg" -print
-
-          mkdir -p dist
-
+          set -euo pipefail
+          echo "SVG files generated in workspace:"
+          find . -type f -name '*.svg' -print
           for filename in \
+            github-contribution-grid-snake.svg \
+            github-contribution-grid-snake-dark.svg \
             pacman-contribution-graph.svg \
             pacman-contribution-graph-dark.svg
           do
-            if [ ! -f "dist/$filename" ]; then
-              found=$(find . -type f -name "$filename" -print -quit)
-
+            if [ ! -s "dist/$filename" ]; then
+              found=$(find . -type f -name "$filename" -not -path "./dist/$filename" -print -quit)
               if [ -n "$found" ]; then
                 cp "$found" "dist/$filename"
               fi
             fi
-
             if [ ! -s "dist/$filename" ]; then
-              echo "::error::Missing file: $filename"
+              echo "::error::Expected animation is missing: dist/$filename"
               exit 1
             fi
           done
-
-          echo "Final files:"
-          ls -lh dist/
+          echo "All four SVG animations are present:"
+          ls -lh dist/*.svg
 
       - name: Publish Animations
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
           build_dir: dist
+          keep_history: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
