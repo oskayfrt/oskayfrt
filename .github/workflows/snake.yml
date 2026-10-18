@@ -37,7 +37,7 @@ jobs:
         with:
           github_user_name: oskayfrt
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          games: pacman,breakout
+          games: pacman
 
       - name: Verify both animations before publishing
         shell: bash
@@ -50,8 +50,6 @@ jobs:
             github-contribution-grid-snake-dark.svg \
             pacman-contribution-graph.svg \
             pacman-contribution-graph-dark.svg \
-            breakout-contribution-graph.svg \
-            breakout-contribution-graph-dark.svg
           do
             if [ ! -s "dist/$filename" ]; then
               found=$(find . -type f -name "$filename" -not -path "./dist/$filename" -print -quit)
@@ -64,7 +62,7 @@ jobs:
               exit 1
             fi
           done
-          echo "All six SVG animations are present:"
+          echo "All four SVG animations are present:"
           ls -lh dist/*.svg
 
       - name: Publish Animations
