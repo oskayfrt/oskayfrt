@@ -34,6 +34,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           games: pacman
 
+      - name: Check generated animation files
+        run: |
+          echo "Generated animation files:"
+          find dist -maxdepth 3 -type f -print
+          echo "Checking Pac-Man files:"
+          test -f dist/pacman-contribution-graph.svg
+          test -f dist/pacman-contribution-graph-dark.svg
+
       - name: Publish Animations
         uses: crazy-max/ghaction-github-pages@v4
         with:
