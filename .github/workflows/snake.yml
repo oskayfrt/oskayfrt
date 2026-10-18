@@ -31,16 +31,36 @@ jobs:
         uses: abozanona/pacman-contribution-graph@main
         with:
           github_user_name: oskayfrt
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           games: pacman
 
-      - name: Check generated animation files
+      - name: Find and verify animations
+        shell: bash
         run: |
-          echo "Generated animation files:"
-          find dist -maxdepth 3 -type f -print
-          echo "Checking Pac-Man files:"
-          test -f dist/pacman-contribution-graph.svg
-          test -f dist/pacman-contribution-graph-dark.svg
+          echo "All SVG files:"
+          find . -type f -name "*.svg" -print
+
+          mkdir -p dist
+
+          for filename in \
+            pacman-contribution-graph.svg \
+            pacman-contribution-graph-dark.svg
+          do
+            if [ ! -f "dist/$filename" ]; then
+              found=$(find . -type f -name "$filename" -print -quit)
+
+              if [ -n "$found" ]; then
+                cp "$found" "dist/$filename"
+              fi
+            fi
+
+            if [ ! -s "dist/$filename" ]; then
+              echo "::error::Missing file: $filename"
+              exit 1
+            fi
+          done
+
+          echo "Final files:"
+          ls -lh dist/
 
       - name: Publish Animations
         uses: crazy-max/ghaction-github-pages@v4
